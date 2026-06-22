@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bundle Pricing Test — CaseCraft</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+.test-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+}
+.test-section {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 24px;
+  border: 2px solid var(--green-100);
+}
+.test-section h3 {
+  font-size: 20px;
+  margin-bottom: 16px;
+  color: var(--text-dark);
+}
+.test-result {
+  padding: 16px;
+  background: var(--green-50);
+  border-radius: var(--radius-sm);
+  margin: 12px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.test-result strong {
+  color: var(--green-600);
+}
+.test-button {
+  padding: 12px 24px;
+  background: var(--green-600);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 8px 8px 8px 0;
+  transition: var(--transition);
+}
+.test-button:hover {
+  background: var(--green-700);
+}
+.test-button.reset {
+  background: #e74c3c;
+}
+.test-button.reset:hover {
+  background: #c0392b;
+}
+</style>
+</head>
+<body>
+
+<div class="announcement-bar">
+  <div class="announcement-track">
+    <span>🔥 Bundle Pricing Test Page</span>
+    <span>✓ Testing Cart-Level Bundle Discounts</span>
+    <span>🔥 Bundle Pricing Test Page</span>
+    <span>✓ Testing Cart-Level Bundle Discounts</span>
+  </div>
+</div>
+
+<header class="header">
+  <a href="index.html" class="logo">Case<span>Craft</span></a>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="bundles.html">Bundle Deals</a>
+    <a href="cart.html">Cart</a>
+  </nav>
+  <div class="header-actions">
+    <a href="cart.html"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-count">0</span></a>
+  </div>
+</header>
+
+<div class="test-container">
+  <h1 style="text-align:center;margin-bottom:12px;">Bundle Pricing Test</h1>
+  <p style="text-align:center;color:var(--text-light);margin-bottom:32px;">Testing cart-level bundle discounts across different products and phone models</p>
+
+  <div class="test-section">
+    <h3>Test 1: 2 Metal Cases from Different Products</h3>
+    <p style="color:var(--text-mid);margin-bottom:12px;">Add iPhone 15 Metal Case + Samsung S24 Metal Case = Should get 2-case bundle price ₹569</p>
+    <button class="test-button" onclick="test1()">Run Test 1</button>
+    <div id="result1" class="test-result" style="display:none;"></div>
+  </div>
+
+  <div class="test-section">
+    <h3>Test 2: 3 Metal Cases from Different Products</h3>
+    <p style="color:var(--text-mid);margin-bottom:12px;">Add iPhone 15 Metal Case + Samsung S24 Metal Case + Nothing Phone 3 Metal Case = Should get 3-case bundle price ₹799</p>
+    <button class="test-button" onclick="test2()">Run Test 2</button>
+    <div id="result2" class="test-result" style="display:none;"></div>
+  </div>
+
+  <div class="test-section">
+    <h3>Test 3: Mixed Case Types (No Bundle)</h3>
+    <p style="color:var(--text-mid);margin-bottom:12px;">Add 1 Metal Case + 1 Glass Case = Should NOT get bundle discount (different types)</p>
+    <button class="test-button" onclick="test3()">Run Test 3</button>
+    <div id="result3" class="test-result" style="display:none;"></div>
+  </div>
+
+  <div class="test-section">
+    <h3>Test 4: 4 Glass Cases</h3>
+    <p style="color:var(--text-mid);margin-bottom:12px;">Add 4 Glass Cases = Should get 4-case bundle price ₹1,159</p>
+    <button class="test-button" onclick="test4()">Run Test 4</button>
+    <div id="result4" class="test-result" style="display:none;"></div>
+  </div>
+
+  <div style="text-align:center;margin-top:32px;">
+    <button class="test-button reset" onclick="resetCart()">Reset Cart</button>
+    <a href="cart.html" class="test-button" style="display:inline-block;text-decoration:none;">View Cart →</a>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script>
+function resetCart() {
+  Cart.clear();
+  showToast('Cart cleared');
+  document.querySelectorAll('.test-result').forEach(el => el.style.display = 'none');
+}
+
+function test1() {
+  Cart.clear();
+  // Add iPhone 15 Metal Case (product 1)
+  Cart.addItem(1, 'Metal Case', ['iPhone 15']);
+  // Add Samsung S24 Metal Case (product 2)
+  Cart.addItem(2, 'Metal Case', ['Galaxy S24']);
+  
+  const summary = Cart.getCartSummary();
+  const result = document.getElementById('result1');
+  result.style.display = 'block';
+  result.innerHTML = `
+    <strong>Cart Contents:</strong><br>
+    • Product 1 (Forest Green Matte) - Metal Case - iPhone 15<br>
+    • Product 2 (Sage Leaf Transparent) - Metal Case - Galaxy S24<br>
+    <br>
+    <strong>Bundle Calculation:</strong><br>
+    • Total Metal Cases: 2<br>
+    • Original Price: 2 × ₹349 = ₹698<br>
+    • Bundle Price (2 cases): ₹569<br>
+    • <strong style="color:var(--green-600);">You Saved: ₹129</strong><br>
+    <br>
+    <strong>Actual Cart Summary:</strong><br>
+    • Total Items: ${summary.totalItems}<br>
+    • Metal Cases Group: ${summary.groups.find(g => g.caseType === 'Metal Case')?.qty || 0} cases<br>
+    • Bundle Price: ₹${summary.groups.find(g => g.caseType === 'Metal Case')?.bundlePrice || 0}<br>
+    • Savings: ₹${summary.groups.find(g => g.caseType === 'Metal Case')?.savings || 0}<br>
+    <br>
+    ${summary.totalItems === 2 && summary.groups.find(g => g.caseType === 'Metal Case')?.bundlePrice === 569 
+      ? '✅ <strong style="color:var(--green-600);">TEST PASSED!</strong>' 
+      : '❌ <strong style="color:#e74c3c;">TEST FAILED!</strong>'}
+  `;
+}
+
+function test2() {
+  Cart.clear();
+  // Add 3 Metal Cases from different products
+  Cart.addItem(1, 'Metal Case', ['iPhone 15']);
+  Cart.addItem(2, 'Metal Case', ['Galaxy S24']);
+  Cart.addItem(3, 'Metal Case', ['Nothing Phone (2)']);
+  
+  const summary = Cart.getCartSummary();
+  const result = document.getElementById('result2');
+  result.style.display = 'block';
+  result.innerHTML = `
+    <strong>Cart Contents:</strong><br>
+    • Product 1 - Metal Case - iPhone 15<br>
+    • Product 2 - Metal Case - Galaxy S24<br>
+    • Product 3 - Metal Case - Nothing Phone (2)<br>
+    <br>
+    <strong>Bundle Calculation:</strong><br>
+    • Total Metal Cases: 3<br>
+    • Original Price: 3 × ₹349 = ₹1,047<br>
+    • Bundle Price (3 cases): ₹799<br>
+    • <strong style="color:var(--green-600);">You Saved: ₹248</strong><br>
+    <br>
+    <strong>Actual Cart Summary:</strong><br>
+    • Total Items: ${summary.totalItems}<br>
+    • Metal Cases Group: ${summary.groups.find(g => g.caseType === 'Metal Case')?.qty || 0} cases<br>
+    • Bundle Price: ₹${summary.groups.find(g => g.caseType === 'Metal Case')?.bundlePrice || 0}<br>
+    • Savings: ₹${summary.groups.find(g => g.caseType === 'Metal Case')?.savings || 0}<br>
+    <br>
+    ${summary.totalItems === 3 && summary.groups.find(g => g.caseType === 'Metal Case')?.bundlePrice === 799 
+      ? '✅ <strong style="color:var(--green-600);">TEST PASSED!</strong>' 
+      : '❌ <strong style="color:#e74c3c;">TEST FAILED!</strong>'}
+  `;
+}
+
+function test3() {
+  Cart.clear();
+  // Add 1 Metal Case + 1 Glass Case
+  Cart.addItem(1, 'Metal Case', ['iPhone 15']);
+  Cart.addItem(2, 'Glass Case', ['Galaxy S24']);
+  
+  const summary = Cart.getCartSummary();
+  const metalGroup = summary.groups.find(g => g.caseType === 'Metal Case');
+  const glassGroup = summary.groups.find(g => g.caseType === 'Glass Case');
+  
+  const result = document.getElementById('result3');
+  result.style.display = 'block';
+  result.innerHTML = `
+    <strong>Cart Contents:</strong><br>
+    • Product 1 - Metal Case - iPhone 15<br>
+    • Product 2 - Glass Case - Galaxy S24<br>
+    <br>
+    <strong>Bundle Calculation:</strong><br>
+    • Metal Cases: 1 (no bundle discount)<br>
+    • Glass Cases: 1 (no bundle discount)<br>
+    • Original Price: ₹349 + ₹399 = ₹748<br>
+    • Bundle Price: ₹349 + ₹399 = ₹748<br>
+    • <strong style="color:#e74c3c;">No Savings (different case types)</strong><br>
+    <br>
+    <strong>Actual Cart Summary:</strong><br>
+    • Total Items: ${summary.totalItems}<br>
+    • Metal Cases: ${metalGroup?.qty || 0} case(s) - Price: ₹${metalGroup?.bundlePrice || 0}<br>
+    • Glass Cases: ${glassGroup?.qty || 0} case(s) - Price: ₹${glassGroup?.bundlePrice || 0}<br>
+    • Total Savings: ₹${summary.totalSavings}<br>
+    <br>
+    ${summary.totalItems === 2 && summary.totalSavings === 0 
+      ? '✅ <strong style="color:var(--green-600);">TEST PASSED!</strong> (No bundle discount applied)' 
+      : '❌ <strong style="color:#e74c3c;">TEST FAILED!</strong>'}
+  `;
+}
+
+function test4() {
+  Cart.clear();
+  // Add 4 Glass Cases
+  Cart.addItem(1, 'Glass Case', ['iPhone 15']);
+  Cart.addItem(2, 'Glass Case', ['Galaxy S24']);
+  Cart.addItem(3, 'Glass Case', ['Nothing Phone (2)']);
+  Cart.addItem(4, 'Glass Case', ['OnePlus 12']);
+  
+  const summary = Cart.getCartSummary();
+  const result = document.getElementById('result4');
+  result.style.display = 'block';
+  result.innerHTML = `
+    <strong>Cart Contents:</strong><br>
+    • 4 Glass Cases from different products<br>
+    <br>
+    <strong>Bundle Calculation:</strong><br>
+    • Total Glass Cases: 4<br>
+    • Original Price: 4 × ₹399 = ₹1,596<br>
+    • Bundle Price (4 cases): ₹1,159<br>
+    • <strong style="color:var(--green-600);">You Saved: ₹437</strong><br>
+    <br>
+    <strong>Actual Cart Summary:</strong><br>
+    • Total Items: ${summary.totalItems}<br>
+    • Glass Cases Group: ${summary.groups.find(g => g.caseType === 'Glass Case')?.qty || 0} cases<br>
+    • Bundle Price: ₹${summary.groups.find(g => g.caseType === 'Glass Case')?.bundlePrice || 0}<br>
+    • Savings: ₹${summary.groups.find(g => g.caseType === 'Glass Case')?.savings || 0}<br>
+    <br>
+    ${summary.totalItems === 4 && summary.groups.find(g => g.caseType === 'Glass Case')?.bundlePrice === 1159 
+      ? '✅ <strong style="color:var(--green-600);">TEST PASSED!</strong>' 
+      : '❌ <strong style="color:#e74c3c;">TEST FAILED!</strong>'}
+  `;
+}
+</script>
+</body>
+</html>

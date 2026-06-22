@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop All Cases — CaseCraft</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="announcement-bar">
+  <div class="announcement-track">
+    <span><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Free Delivery Across India</span>
+    <span><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Thousands Trust Our Premium Cases</span>
+    <span><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> 30-Day Easy Returns</span>
+    <span><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Free Delivery Across India</span>
+    <span><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Thousands Trust Our Premium Cases</span>
+    <span><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> 30-Day Easy Returns</span>
+  </div>
+</div>
+
+<header class="header">
+  <a href="index.html" class="logo">Case<span>Craft</span></a>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="bundles.html">Bundle Deals</a>
+    <a href="shop.html?category=hard">Categories</a>
+    <a href="search.html">Search</a>
+  </nav>
+  <div class="header-actions">
+    <button class="header-search-btn" aria-label="Search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    </button>
+    <a href="login.html" aria-label="Account">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </a>
+    <a href="cart.html" aria-label="Cart">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="cart-count">0</span>
+    </a>
+    <button class="mobile-menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-inner">
+    <button class="mobile-nav-close">&times;</button>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop All</a>
+    <a href="shop.html?category=hard">Hard Cases</a>
+    <a href="shop.html?category=soft">Soft Cases</a>
+    <a href="shop.html?category=glass">Glass Cases</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html">Login / Register</a>
+  </div>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <h1 id="pageTitle">Shop All Cases</h1>
+  <p id="pageSubtitle">Discover our complete collection of premium phone cases</p>
+  <div class="breadcrumb">
+    <a href="index.html">Home</a> <span>/</span> <span id="breadcrumbCurrent">Shop</span>
+  </div>
+</div>
+
+<!-- BUNDLE OFFER BANNER -->
+<div style="background: linear-gradient(135deg, var(--green-50), var(--white)); padding: 40px 20px; border-bottom: 1px solid var(--green-100);">
+  <div style="max-width: 1280px; margin: 0 auto; text-align: center;">
+    <h2 style="font-size: 28px; color: var(--text-dark); margin-bottom: 12px;">Most Customers Buy 2 Or More Cases To Save More</h2>
+    <p style="font-size: 16px; color: var(--text-mid); margin-bottom: 24px;">Premium Custom Phone Cases</p>
+    
+    <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 32px;">
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-mid);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green-500)" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+        Any Phone Brand
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-mid);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green-500)" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+        Any Phone Model
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-mid);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green-500)" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+        Mix Different Models
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-mid);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green-500)" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+        Automatic Bundle Discounts
+      </div>
+    </div>
+
+    <h3 style="font-size: 20px; color: var(--text-dark); margin-bottom: 20px;">Most Popular Offers</h3>
+    
+    <!-- PROGRESS BAR -->
+    <div style="display: flex; align-items: center; justify-content: center; gap: 0; max-width: 800px; margin: 0 auto 32px; position: relative;">
+      <div style="flex: 1; text-align: center; position: relative;">
+        <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--white); border: 3px solid var(--green-200); display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; font-size: 24px; font-weight: 700; color: var(--text-mid);">1</div>
+        <div style="font-size: 13px; color: var(--text-light);">Case</div>
+      </div>
+      <div style="flex: 1; height: 3px; background: var(--green-200);"></div>
+      <div style="flex: 1; text-align: center; position: relative;">
+        <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--white); border: 3px solid var(--green-300); display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; font-size: 24px; font-weight: 700; color: var(--text-mid);">2</div>
+        <div style="font-size: 13px; color: var(--text-light);">Best Starter</div>
+      </div>
+      <div style="flex: 1; height: 3px; background: var(--green-300);"></div>
+      <div style="flex: 1; text-align: center; position: relative;">
+        <div style="width: 70px; height: 70px; border-radius: 50%; background: var(--green-500); border: 3px solid var(--green-600); display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; font-size: 28px; font-weight: 800; color: var(--white); box-shadow: 0 4px 12px rgba(74,173,126,0.3);">3</div>
+        <div style="font-size: 13px; font-weight: 700; color: var(--green-600);">Most Popular</div>
+        <div style="position: absolute; top: -30px; left: 50%; transform: translateX(-50%); background: var(--green-500); color: var(--white); padding: 4px 12px; border-radius: 100px; font-size: 11px; font-weight: 700; white-space: nowrap;">BEST VALUE</div>
+      </div>
+      <div style="flex: 1; height: 3px; background: var(--green-200);"></div>
+      <div style="flex: 1; text-align: center; position: relative;">
+        <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--white); border: 3px solid var(--green-200); display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; font-size: 24px; font-weight: 700; color: var(--text-mid);">4</div>
+        <div style="font-size: 13px; color: var(--text-light);">Max Savings</div>
+      </div>
+    </div>
+
+    <div style="display: inline-block; background: var(--green-50); padding: 12px 24px; border-radius: 100px; font-size: 14px; color: var(--green-700); font-weight: 600;">
+      🔥 Limited Time Bundle Offer — Automatic Savings Applied — No Coupon Needed
+    </div>
+  </div>
+</div>
+
+<!-- SHOP LAYOUT -->
+<div class="shop-layout">
+  <!-- SIDEBAR -->
+  <aside class="shop-sidebar">
+    <div class="filter-group">
+      <h3>Category</h3>
+      <label class="filter-option">
+        <input type="checkbox" value="hard" class="filter-category"> Hard Cases <span class="count" id="countHard">0</span>
+      </label>
+      <label class="filter-option">
+        <input type="checkbox" value="soft" class="filter-category"> Soft Cases <span class="count" id="countSoft">0</span>
+      </label>
+      <label class="filter-option">
+        <input type="checkbox" value="glass" class="filter-category"> Glass Cases <span class="count" id="countGlass">0</span>
+      </label>
+    </div>
+
+    <div class="filter-group">
+      <h3>Collection</h3>
+      <label class="filter-option">
+        <input type="checkbox" value="minimalist" class="filter-collection"> Minimalist
+      </label>
+      <label class="filter-option">
+        <input type="checkbox" value="anime" class="filter-collection"> Anime Series
+      </label>
+      <label class="filter-option">
+        <input type="checkbox" value="sports" class="filter-collection"> Sports Edition
+      </label>
+      <label class="filter-option">
+        <input type="checkbox" value="nature" class="filter-collection"> Nature Vibes
+      </label>
+      <label class="filter-option">
+        <input type="checkbox" value="trending" class="filter-collection"> Trending Now
+      </label>
+    </div>
+
+    <div class="filter-group">
+      <h3>Price Range</h3>
+      <label class="filter-option">
+        <input type="checkbox" value="0-399" class="filter-price"> Under ₹400
+      </label>
+      <label class="filter-option">
+        <input type="checkbox" value="400-599" class="filter-price"> ₹400 - ₹599
+      </label>
+      <label class="filter-option">
+        <input type="checkbox" value="600-9999" class="filter-price"> ₹600 & Above
+      </label>
+    </div>
+
+    <button class="btn-secondary" style="width:100%; justify-content:center;" onclick="clearFilters()">Clear All Filters</button>
+  </aside>
+
+  <!-- PRODUCTS -->
+  <div class="shop-main">
+    <div class="shop-toolbar">
+      <span class="results" id="resultsCount">Showing 0 products</span>
+      <select id="sortSelect" onchange="applyFilters()">
+        <option value="featured">Sort: Featured</option>
+        <option value="price-low">Price: Low to High</option>
+        <option value="price-high">Price: High to Low</option>
+        <option value="name">Name: A to Z</option>
+      </select>
+    </div>
+    <div class="products-grid" id="shopGrid"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">Case<span>Craft</span></a>
+      <p>Premium phone cases designed for protection, personality, and style.</p>
+      <div class="social-links">
+        <a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
+        <a href="#"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      </div>
+    </div>
+    <div><h4>Shop</h4><ul><li><a href="shop.html">All Cases</a></li><li><a href="shop.html?category=hard">Hard Cases</a></li><li><a href="shop.html?category=soft">Soft Cases</a></li><li><a href="shop.html?category=glass">Glass Cases</a></li></ul></div>
+    <div><h4>Help</h4><ul><li><a href="#">Track Order</a></li><li><a href="#">Shipping Info</a></li><li><a href="#">Returns</a></li><li><a href="#">FAQs</a></li></ul></div>
+    <div><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2025 CaseCraft. All rights reserved.</p></div>
+</footer>
+
+<script src="app.js"></script>
+<script>
+// Update category counts
+document.getElementById('countHard').textContent = PRODUCTS.filter(p => p.category === 'hard').length;
+document.getElementById('countSoft').textContent = PRODUCTS.filter(p => p.category === 'soft').length;
+document.getElementById('countGlass').textContent = PRODUCTS.filter(p => p.category === 'glass').length;
+
+// Read URL params
+const urlParams = new URLSearchParams(window.location.search);
+const paramCategory = urlParams.get('category');
+const paramCollection = urlParams.get('collection');
+
+if (paramCategory) {
+  document.getElementById('pageTitle').textContent = paramCategory.charAt(0).toUpperCase() + paramCategory.slice(1) + ' Cases';
+  document.getElementById('breadcrumbCurrent').textContent = paramCategory.charAt(0).toUpperCase() + paramCategory.slice(1) + ' Cases';
+  document.querySelector(`.filter-category[value="${paramCategory}"]`).checked = true;
+}
+if (paramCollection) {
+  const coll = COLLECTIONS.find(c => c.id === paramCollection);
+  if (coll) {
+    document.getElementById('pageTitle').textContent = coll.name + ' Collection';
+    document.getElementById('breadcrumbCurrent').textContent = coll.name;
+    document.querySelector(`.filter-collection[value="${paramCollection}"]`).checked = true;
+  }
+}
+
+// Filter listeners
+document.querySelectorAll('.filter-category, .filter-collection, .filter-price').forEach(cb => {
+  cb.addEventListener('change', applyFilters);
+});
+
+function applyFilters() {
+  const categories = Array.from(document.querySelectorAll('.filter-category:checked')).map(cb => cb.value);
+  const collections = Array.from(document.querySelectorAll('.filter-collection:checked')).map(cb => cb.value);
+  const priceRanges = Array.from(document.querySelectorAll('.filter-price:checked')).map(cb => cb.value);
+
+  let filters = { sort: document.getElementById('sortSelect').value };
+  if (categories.length) filters.category = categories;
+  if (collections.length) filters.collection = collections;
+
+  let results = [...PRODUCTS];
+
+  if (categories.length) results = results.filter(p => categories.includes(p.category));
+  if (collections.length) results = results.filter(p => collections.includes(p.collection));
+  
+  if (priceRanges.length) {
+    results = results.filter(p => {
+      return priceRanges.some(range => {
+        const [min, max] = range.split('-').map(Number);
+        return p.price >= min && p.price <= max;
+      });
+    });
+  }
+
+  if (filters.sort === 'price-low') results.sort((a,b) => a.price - b.price);
+  else if (filters.sort === 'price-high') results.sort((a,b) => b.price - a.price);
+  else if (filters.sort === 'name') results.sort((a,b) => a.name.localeCompare(b.name));
+
+  document.getElementById('shopGrid').innerHTML = results.length ? results.map(p => renderProductCard(p)).join('') : '<p style="text-align:center;grid-column:1/-1;padding:60px;color:var(--text-light);">No products found matching your filters.</p>';
+  document.getElementById('resultsCount').textContent = `Showing ${results.length} product${results.length !== 1 ? 's' : ''}`;
+
+  // Re-observe for scroll animations
+  document.querySelectorAll('.reveal').forEach(el => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    observer.observe(el);
+  });
+}
+
+function clearFilters() {
+  document.querySelectorAll('.filter-category, .filter-collection, .filter-price').forEach(cb => cb.checked = false);
+  document.getElementById('sortSelect').value = 'featured';
+  applyFilters();
+}
+
+// Initial render
+applyFilters();
+</script>
+</body>
+</html>

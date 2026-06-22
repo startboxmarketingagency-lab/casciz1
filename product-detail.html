@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Detail — CaseCraft</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+.case-type-options { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+.case-type-btn {
+  padding: 16px 32px;
+  border: 2px solid var(--green-200);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  font-size: 16px;
+  font-weight: 600;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  justify-content: center;
+}
+.case-type-btn:hover { border-color: var(--green-400); }
+.case-type-btn.active {
+  border-color: var(--green-500);
+  background: var(--green-50);
+  color: var(--green-700);
+  box-shadow: 0 0 0 3px rgba(74,173,126,0.1);
+}
+.case-type-btn svg { width: 22px; height: 22px; }
+
+.phone-selector { display: flex; flex-direction: column; gap: 16px; }
+.selector-group { display: flex; flex-direction: column; gap: 8px; }
+.selector-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+.selector-group select {
+  padding: 14px 16px;
+  border: 2px solid var(--green-200);
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+  background: var(--white);
+  transition: var(--transition);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23358a64' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+.selector-group select:focus { border-color: var(--green-400); }
+
+.model-checkboxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  max-height: 220px;
+  overflow-y: auto;
+  padding: 16px;
+  border: 2px solid var(--green-100);
+  border-radius: var(--radius-sm);
+  background: var(--green-50);
+}
+.model-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--white);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 14px;
+  font-weight: 500;
+}
+.model-checkbox:hover { background: var(--green-100); }
+.model-checkbox input { accent-color: var(--green-500); cursor: pointer; width: 18px; height: 18px; }
+.model-checkbox.selected { background: var(--green-200); border: 2px solid var(--green-400); }
+
+.selected-models {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.model-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: var(--green-500);
+  color: var(--white);
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.model-tag button {
+  background: none;
+  color: var(--white);
+  font-size: 18px;
+  line-height: 1;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+.model-tag button:hover { background: rgba(255,255,255,0.2); }
+
+/* PRICING CARDS */
+.pricing-section {
+  margin: 32px 0;
+}
+.pricing-section-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+  color: var(--text-dark);
+}
+.pricing-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.pricing-card {
+  background: var(--white);
+  border: 2px solid var(--green-100);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+  transition: var(--transition);
+  position: relative;
+  cursor: pointer;
+}
+.pricing-card:hover {
+  border-color: var(--green-400);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.pricing-card.selected {
+  border-color: var(--green-500);
+  background: var(--green-50);
+  box-shadow: 0 0 0 3px rgba(74,173,126,0.1);
+}
+.pricing-card.popular {
+  border-color: var(--green-500);
+  background: linear-gradient(135deg, var(--green-50), var(--white));
+  transform: scale(1.05);
+  box-shadow: var(--shadow-lg);
+}
+.pricing-card.popular.selected {
+  transform: scale(1.05) translateY(-4px);
+}
+.pricing-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--green-500);
+  color: var(--white);
+  padding: 4px 16px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.pricing-card .quantity {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--green-600);
+  margin: 12px 0 8px;
+}
+.pricing-card .price {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+.pricing-card .savings {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--green-600);
+  background: var(--green-100);
+  padding: 6px 12px;
+  border-radius: 100px;
+  display: inline-block;
+}
+.popular-badge-text {
+  text-align: center;
+  margin: 16px 0;
+  padding: 12px;
+  background: linear-gradient(135deg, #fff3cd, #ffe69c);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  color: #856404;
+}
+
+/* ORDER SUMMARY */
+.order-summary {
+  background: var(--green-50);
+  border: 2px solid var(--green-200);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin: 24px 0;
+}
+.order-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 15px;
+}
+.order-summary-row.total {
+  border-top: 2px solid var(--green-300);
+  margin-top: 8px;
+  padding-top: 12px;
+  font-size: 18px;
+  font-weight: 700;
+}
+.order-summary-row .savings-highlight {
+  color: var(--green-600);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+/* CONGRATS MESSAGE */
+.congrats-message {
+  text-align: center;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--green-500), var(--green-600));
+  color: var(--white);
+  border-radius: var(--radius-sm);
+  margin: 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+.congrats-message .amount {
+  font-size: 24px;
+  font-weight: 800;
+  display: block;
+  margin-top: 4px;
+}
+
+/* DYNAMIC MESSAGE */
+.dynamic-message {
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #fff3cd, #ffe69c);
+  border-left: 4px solid #ffc107;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: #856404;
+  font-weight: 500;
+  margin: 16px 0;
+  line-height: 1.5;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .pricing-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+  .pricing-card.popular {
+    transform: scale(1);
+  }
+  .pricing-card.popular.selected {
+    transform: translateY(-4px);
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="announcement-bar">
+  <div class="announcement-track">
+    <span>🔥 Buy 2+ Cases & Save More</span>
+    <span>✓ Automatic Bundle Discounts</span>
+    <span>✓ Free Delivery Across India</span>
+    <span>✓ 30-Day Easy Returns</span>
+    <span>🔥 Buy 2+ Cases & Save More</span>
+    <span>✓ Automatic Bundle Discounts</span>
+    <span>✓ Free Delivery Across India</span>
+    <span>✓ 30-Day Easy Returns</span>
+  </div>
+</div>
+
+<header class="header">
+  <a href="index.html" class="logo">Case<span>Craft</span></a>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="bundles.html">Bundle Deals</a>
+    <a href="shop.html?category=hard">Categories</a>
+    <a href="search.html">Search</a>
+  </nav>
+  <div class="header-actions">
+    <button class="header-search-btn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
+    <a href="login.html"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+    <a href="cart.html"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-count">0</span></a>
+    <button class="mobile-menu-btn"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-inner">
+    <button class="mobile-nav-close">&times;</button>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop All</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html">Login</a>
+  </div>
+</div>
+
+<div class="page-header" style="padding:30px 40px;">
+  <div class="breadcrumb">
+    <a href="index.html">Home</a> <span>/</span> <a href="shop.html">Shop</a> <span>/</span> <span id="breadcrumbProduct">Product</span>
+  </div>
+</div>
+
+<div class="product-detail" id="productDetail"></div>
+
+<!-- RELATED PRODUCTS -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-label">You May Also Like</span>
+    <h2>Related Products</h2>
+  </div>
+  <div class="products-grid" id="relatedGrid"></div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">Case<span>Craft</span></a>
+      <p>Premium phone cases designed for protection, personality, and style.</p>
+    </div>
+    <div><h4>Shop</h4><ul><li><a href="shop.html">All Cases</a></li><li><a href="shop.html?category=hard">Hard Cases</a></li><li><a href="shop.html?category=soft">Soft Cases</a></li></ul></div>
+    <div><h4>Help</h4><ul><li><a href="#">Track Order</a></li><li><a href="#">Returns</a></li><li><a href="#">FAQs</a></li></ul></div>
+    <div><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Privacy Policy</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2025 CaseCraft. All rights reserved.</p></div>
+</footer>
+
+<script src="app.js"></script>
+<script>
+const params = new URLSearchParams(window.location.search);
+const productId = parseInt(params.get('id')) || 1;
+const product = PRODUCTS.find(p => p.id === productId) || PRODUCTS[0];
+
+let selectedCaseType = 'Glass Case';
+let selectedBrand = '';
+let selectedModels = [];
+
+if (!product) {
+  document.getElementById('productDetail').innerHTML = '<p style="text-align:center;grid-column:1/-1;">Product not found.</p>';
+} else {
+  document.title = product.name + ' — CaseCraft';
+  document.getElementById('breadcrumbProduct').textContent = product.name;
+
+  const brands = Object.keys(PHONE_BRANDS);
+
+  document.getElementById('productDetail').innerHTML = `
+    <div class="product-gallery">
+      <div class="product-thumbnails">
+        <div class="thumb active" style="background: ${product.gradient};"></div>
+        <div class="thumb" style="background: ${product.gradient}; filter: brightness(0.95);"></div>
+        <div class="thumb" style="background: ${product.gradient}; filter: brightness(1.05);"></div>
+      </div>
+      <div class="product-main-image">
+        <div class="product-main-image-bg" style="background: ${product.gradient};"></div>
+        ${product.badge ? `<span class="product-badge" style="top:20px;left:20px;">${product.badge}</span>` : ''}
+      </div>
+    </div>
+    <div class="product-detail-info">
+      <h1>${product.name}</h1>
+      <div class="stars" style="margin-bottom:12px;">
+        <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#f4c430;"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#f4c430;"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#f4c430;"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#f4c430;"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#f4c430;"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <span style="font-size:13px;color:var(--text-light);margin-left:6px;">(128 reviews)</span>
+      </div>
+      <p class="description">${product.desc}</p>
+
+      <div class="popular-badge-text">
+        ⭐ 83% of customers choose 2 or more cases
+      </div>
+
+      <div class="option-group">
+        <label>Step 1: Select Case Type</label>
+        <div class="case-type-options">
+          <button class="case-type-btn active" onclick="selectCaseType(this, 'Glass Case')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 18h6"/></svg>
+            Glass Case
+          </button>
+          <button class="case-type-btn" onclick="selectCaseType(this, 'Metal Case')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 18h6"/><path d="M9 6h6"/></svg>
+            Metal Case
+          </button>
+        </div>
+      </div>
+
+      <div class="pricing-section">
+        <div class="pricing-section-title">Step 2: Choose Your Bundle (Buy More, Save More!)</div>
+        <div class="pricing-cards" id="pricingCards"></div>
+      </div>
+
+      <div class="option-group">
+        <label>Step 3: Select Phone Brand</label>
+        <div class="phone-selector">
+          <div class="selector-group">
+            <select id="brandSelect" onchange="onBrandChange()">
+              <option value="">-- Choose Brand --</option>
+              ${brands.map(b => `<option value="${b}">${b}</option>`).join('')}
+            </select>
+          </div>
+
+          <div class="selector-group" id="modelGroup" style="display:none;">
+            <label>Select Phone Model(s) <span style="font-weight:400;color:var(--text-light);">(Min 1, Max 4 — Each model = 1 case)</span></label>
+            <div class="model-checkboxes" id="modelCheckboxes"></div>
+          </div>
+
+          <div class="selected-models" id="selectedModelsTags"></div>
+          <div class="dynamic-message" id="dynamicMessage" style="display:none;"></div>
+        </div>
+      </div>
+
+      <div class="order-summary" id="orderSummary" style="display:none;">
+        <div class="order-summary-row">
+          <span>Selected Models:</span>
+          <strong id="summaryModels">0</strong>
+        </div>
+        <div class="order-summary-row">
+          <span>Original Price:</span>
+          <span style="text-decoration:line-through;color:var(--text-light);" id="summaryOriginal">₹0</span>
+        </div>
+        <div class="order-summary-row">
+          <span>Bundle Price:</span>
+          <strong id="summaryBundle">₹0</strong>
+        </div>
+        <div class="order-summary-row">
+          <span>You Save:</span>
+          <span class="savings-highlight" id="summarySavings">₹0</span>
+        </div>
+      </div>
+
+      <div class="congrats-message" id="congratsMessage" style="display:none;">
+        Congratulations! You saved
+        <span class="amount" id="congratsAmount">₹0</span>
+      </div>
+
+      <div class="add-to-cart-section">
+        <button class="btn-primary" onclick="addToCartFromDetail()" id="addToCartBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Add to Cart
+        </button>
+        <button class="btn-primary" style="background:var(--green-700);" onclick="buyNow()">Buy Now</button>
+        <button class="btn-wishlist" onclick="this.querySelector('svg').style.fill='var(--green-500)'; showToast('Added to wishlist!');">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </button>
+      </div>
+
+      <div class="product-features">
+        <div class="feature-item"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg> Free Delivery</div>
+        <div class="feature-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> 1 Year Warranty</div>
+        <div class="feature-item"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path d="M9 12l2 2 4-4"/></svg> 30-Day Returns</div>
+        <div class="feature-item"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg> Secure Payment</div>
+      </div>
+    </div>
+  `;
+
+  // Initialize pricing cards
+  updatePricingCards();
+
+  // Related products
+  const related = PRODUCTS.filter(p => p.id !== product.id && (p.category === product.category || p.collection === product.collection)).slice(0, 4);
+  document.getElementById('relatedGrid').innerHTML = related.map(p => renderProductCard(p)).join('');
+}
+
+function updatePricingCards() {
+  const pricing = BUNDLE_PRICING[selectedCaseType];
+  const cards = [
+    { qty: 1, badge: '', label: 'Starter' },
+    { qty: 2, badge: 'MOST POPULAR', label: 'Best Starter' },
+    { qty: 3, badge: 'BEST VALUE', label: 'Best Value' },
+    { qty: 4, badge: 'MAX SAVINGS', label: 'Family Pack' }
+  ];
+
+  const html = cards.map((card, idx) => {
+    const price = pricing[card.qty];
+    const regularPrice = (selectedCaseType === 'Metal Case' ? 349 : 399) * card.qty;
+    const savings = regularPrice - price;
+    const isPopular = card.qty === 3;
+    
+    return `
+      <div class="pricing-card ${isPopular ? 'popular' : ''}" onclick="selectBundle(${card.qty})">
+        ${card.badge ? `<div class="pricing-badge">${card.badge}</div>` : ''}
+        <div class="quantity">${card.qty}</div>
+        <div style="font-size:13px;color:var(--text-light);margin-bottom:8px;">Case${card.qty > 1 ? 's' : ''}</div>
+        <div class="price">₹${price}</div>
+        ${savings > 0 ? `<div class="savings">Save ₹${savings}</div>` : '<div style="height:28px;"></div>'}
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('pricingCards').innerHTML = html;
+  
+  // Auto-select based on current models
+  if (selectedModels.length > 0) {
+    selectBundle(selectedModels.length, false);
+  }
+}
+
+function selectBundle(qty, updateModels = true) {
+  document.querySelectorAll('.pricing-card').forEach((card, idx) => {
+    card.classList.remove('selected');
+    if (idx + 1 === qty) {
+      card.classList.add('selected');
+    }
+  });
+  
+  // If updating models, limit selection to qty
+  if (updateModels && selectedModels.length > qty) {
+    selectedModels = selectedModels.slice(0, qty);
+    updateSelectedModelsUI();
+    updateModelCheckboxes();
+  }
+  
+  updateOrderSummary();
+}
+
+function updateModelCheckboxes() {
+  const checkboxes = document.querySelectorAll('.model-checkbox input');
+  checkboxes.forEach(cb => {
+    if (!selectedModels.includes(cb.value)) {
+      cb.checked = false;
+      cb.closest('.model-checkbox').classList.remove('selected');
+    }
+  });
+}
+
+function selectCaseType(el, type) {
+  document.querySelectorAll('.case-type-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  selectedCaseType = type;
+  updatePricingCards();
+  updateOrderSummary();
+}
+
+function onBrandChange() {
+  const brand = document.getElementById('brandSelect').value;
+  selectedBrand = brand;
+  selectedModels = [];
+  
+  const modelGroup = document.getElementById('modelGroup');
+  const modelCheckboxes = document.getElementById('modelCheckboxes');
+  
+  if (!brand) {
+    modelGroup.style.display = 'none';
+    updateOrderSummary();
+    return;
+  }
+  
+  const models = PHONE_BRANDS[brand] || [];
+  modelCheckboxes.innerHTML = models.map(m => `
+    <label class="model-checkbox" onclick="toggleModel('${m}', this)">
+      <input type="checkbox" value="${m}">
+      ${m}
+    </label>
+  `).join('');
+  
+  modelGroup.style.display = 'block';
+  updateOrderSummary();
+}
+
+function toggleModel(model, el) {
+  const checkbox = el.querySelector('input');
+  const isChecked = checkbox.checked;
+  
+  if (!isChecked && selectedModels.includes(model)) {
+    selectedModels = selectedModels.filter(m => m !== model);
+    el.classList.remove('selected');
+  } else if (isChecked && !selectedModels.includes(model)) {
+    if (selectedModels.length >= 4) {
+      showToast('Maximum 4 models allowed');
+      checkbox.checked = false;
+      return;
+    }
+    selectedModels.push(model);
+    el.classList.add('selected');
+  }
+  
+  // Update pricing card selection
+  if (selectedModels.length > 0) {
+    selectBundle(selectedModels.length, false);
+  }
+  
+  updateSelectedModelsUI();
+  updateOrderSummary();
+}
+
+function removeModel(model) {
+  selectedModels = selectedModels.filter(m => m !== model);
+  
+  const checkboxes = document.querySelectorAll('.model-checkbox input');
+  checkboxes.forEach(cb => {
+    if (cb.value === model) {
+      cb.checked = false;
+      cb.closest('.model-checkbox').classList.remove('selected');
+    }
+  });
+  
+  if (selectedModels.length > 0) {
+    selectBundle(selectedModels.length, false);
+  }
+  
+  updateSelectedModelsUI();
+  updateOrderSummary();
+}
+
+function updateSelectedModelsUI() {
+  const tagsContainer = document.getElementById('selectedModelsTags');
+  tagsContainer.innerHTML = selectedModels.map(m => `
+    <div class="model-tag">
+      ${m}
+      <button onclick="removeModel('${m}')">&times;</button>
+    </div>
+  `).join('');
+}
+
+function updateOrderSummary() {
+  const orderSummary = document.getElementById('orderSummary');
+  const congratsMessage = document.getElementById('congratsMessage');
+  const dynamicMessage = document.getElementById('dynamicMessage');
+  
+  if (selectedModels.length > 0) {
+    const bundlePrice = getBundlePrice(selectedCaseType, selectedModels.length);
+    const regularPrice = getRegularPrice(selectedCaseType, selectedModels.length);
+    const savings = getSavings(selectedCaseType, selectedModels.length);
+    
+    document.getElementById('summaryModels').textContent = selectedModels.length;
+    document.getElementById('summaryOriginal').textContent = '₹' + regularPrice;
+    document.getElementById('summaryBundle').textContent = '₹' + bundlePrice;
+    document.getElementById('summarySavings').textContent = '₹' + savings;
+    
+    orderSummary.style.display = 'block';
+    
+    if (savings > 0) {
+      congratsMessage.style.display = 'block';
+      document.getElementById('congratsAmount').textContent = '₹' + savings;
+    } else {
+      congratsMessage.style.display = 'none';
+    }
+    
+    // Dynamic message
+    if (selectedModels.length === 1) {
+      dynamicMessage.style.display = 'block';
+      dynamicMessage.textContent = '💡 Add 1 more case and unlock bundle savings.';
+    } else if (selectedModels.length === 2) {
+      dynamicMessage.style.display = 'block';
+      dynamicMessage.textContent = '✨ Great choice! Add 1 more case for maximum value.';
+    } else if (selectedModels.length === 3) {
+      dynamicMessage.style.display = 'block';
+      dynamicMessage.textContent = '🎉 You\'re getting our Best Value bundle!';
+    } else if (selectedModels.length === 4) {
+      dynamicMessage.style.display = 'block';
+      dynamicMessage.textContent = '🏆 Maximum Savings Unlocked! Best deal possible.';
+    }
+  } else {
+    orderSummary.style.display = 'none';
+    congratsMessage.style.display = 'none';
+    dynamicMessage.style.display = 'none';
+  }
+}
+
+function addToCartFromDetail() {
+  if (!selectedBrand) {
+    showToast('Please select a phone brand');
+    return;
+  }
+  if (selectedModels.length === 0) {
+    showToast('Please select at least one phone model');
+    return;
+  }
+  
+  Cart.addItem(product.id, selectedCaseType, selectedModels);
+}
+
+function buyNow() {
+  if (!selectedBrand) {
+    showToast('Please select a phone brand');
+    return;
+  }
+  if (selectedModels.length === 0) {
+    showToast('Please select at least one phone model');
+    return;
+  }
+  
+  Cart.addItem(product.id, selectedCaseType, selectedModels);
+  window.location.href = 'checkout.html';
+}
+</script>
+</body>
+</html>

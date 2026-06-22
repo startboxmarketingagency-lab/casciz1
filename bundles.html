@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bundle Deals — CaseCraft</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+.bundle-hero {
+  background: linear-gradient(135deg, var(--green-600), var(--green-700));
+  color: var(--white);
+  padding: 60px 20px;
+  text-align: center;
+}
+.bundle-hero h1 {
+  font-size: clamp(32px, 5vw, 48px);
+  margin-bottom: 16px;
+}
+.bundle-hero p {
+  font-size: 18px;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.bundle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+.bundle-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: var(--transition);
+  cursor: pointer;
+  border: 2px solid var(--green-100);
+  position: relative;
+}
+.bundle-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--green-400);
+}
+.bundle-card.featured {
+  border-color: var(--green-500);
+  box-shadow: var(--shadow-md);
+}
+.bundle-card.featured:hover {
+  box-shadow: var(--shadow-lg);
+}
+.bundle-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--green-500);
+  color: var(--white);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.bundle-image {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+.bundle-image-bg {
+  position: absolute;
+  inset: 0;
+}
+.bundle-content {
+  padding: 24px;
+}
+.bundle-savings {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+  color: var(--white);
+  padding: 8px 16px;
+  border-radius: 100px;
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+.bundle-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+.bundle-description {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.bundle-price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.bundle-price .current {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--green-600);
+}
+.bundle-price .original {
+  font-size: 16px;
+  color: var(--text-light);
+  text-decoration: line-through;
+}
+.bundle-features {
+  list-style: none;
+  margin-bottom: 20px;
+}
+.bundle-features li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 14px;
+  color: var(--text-mid);
+}
+.bundle-features li::before {
+  content: '✓';
+  color: var(--green-500);
+  font-weight: 700;
+}
+.bundle-cta {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: var(--green-600);
+  color: var(--white);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  transition: var(--transition);
+}
+.bundle-cta:hover {
+  background: var(--green-700);
+}
+.bundle-section-title {
+  text-align: center;
+  padding: 40px 20px 20px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.bundle-section-title h2 {
+  font-size: 32px;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+}
+.bundle-section-title p {
+  font-size: 16px;
+  color: var(--text-light);
+}
+</style>
+</head>
+<body>
+
+<div class="announcement-bar">
+  <div class="announcement-track">
+    <span>🔥 Buy 2+ Cases & Save More</span>
+    <span>✓ Automatic Bundle Discounts</span>
+    <span>✓ Free Delivery Across India</span>
+    <span>✓ 30-Day Easy Returns</span>
+    <span>🔥 Buy 2+ Cases & Save More</span>
+    <span>✓ Automatic Bundle Discounts</span>
+    <span>✓ Free Delivery Across India</span>
+    <span>✓ 30-Day Easy Returns</span>
+  </div>
+</div>
+
+<header class="header">
+  <a href="index.html" class="logo">Case<span>Craft</span></a>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="shop.html?category=hard">Categories</a>
+    <a href="shop.html?collection=trending">Collections</a>
+    <a href="bundles.html">Bundle Deals</a>
+  </nav>
+  <div class="header-actions">
+    <button class="header-search-btn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
+    <a href="login.html"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+    <a href="cart.html"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-count">0</span></a>
+    <button class="mobile-menu-btn"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-inner">
+    <button class="mobile-nav-close">&times;</button>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop All</a>
+    <a href="bundles.html">Bundle Deals</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html">Login</a>
+  </div>
+</div>
+
+<div class="bundle-hero">
+  <h1>Bundle Deals — Save More, Get More</h1>
+  <p>Mix different phone models in one order. Automatic bundle discounts applied. No coupon needed.</p>
+</div>
+
+<div class="bundle-section-title">
+  <h2>Metal Case Bundles</h2>
+  <p>Premium metal finish with maximum protection</p>
+</div>
+
+<div class="bundle-grid" id="metalBundles"></div>
+
+<div class="bundle-section-title">
+  <h2>Glass Case Bundles</h2>
+  <p>Crystal clear with premium glass back</p>
+</div>
+
+<div class="bundle-grid" id="glassBundles"></div>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">Case<span>Craft</span></a>
+      <p>Premium phone cases designed for protection, personality, and style.</p>
+    </div>
+    <div><h4>Shop</h4><ul><li><a href="shop.html">All Cases</a></li><li><a href="shop.html?category=hard">Hard Cases</a></li><li><a href="shop.html?category=soft">Soft Cases</a></li></ul></div>
+    <div><h4>Help</h4><ul><li><a href="#">Track Order</a></li><li><a href="#">Returns</a></li><li><a href="#">FAQs</a></li></ul></div>
+    <div><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Privacy Policy</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2025 CaseCraft. All rights reserved.</p></div>
+</footer>
+
+<script src="app.js"></script>
+<script>
+function renderBundleCard(caseType, qty, featured = false) {
+  const price = getBundlePrice(caseType, qty);
+  const regularPrice = getRegularPrice(caseType, qty);
+  const savings = getSavings(caseType, qty);
+  
+  const badges = {
+    2: 'BEST STARTER',
+    3: 'BEST VALUE',
+    4: 'MAX SAVINGS'
+  };
+  
+  const titles = {
+    2: `${qty} ${caseType}s`,
+    3: `${qty} ${caseType}s`,
+    4: `${qty} ${caseType}s — Family Pack`
+  };
+  
+  const descriptions = {
+    2: 'Perfect starter bundle. Mix 2 different phone models.',
+    3: 'Our most popular choice. Best value for money.',
+    4: 'Maximum savings. Get cases for the whole family.'
+  };
+  
+  return `
+    <div class="bundle-card ${featured ? 'featured' : ''}" onclick="window.location.href='shop.html?bundle=${qty}&type=${encodeURIComponent(caseType)}'">
+      ${qty >= 2 ? `<div class="bundle-badge">${badges[qty]}</div>` : ''}
+      <div class="bundle-image">
+        <div class="bundle-image-bg" style="background: linear-gradient(135deg, ${caseType === 'Metal Case' ? '#a8e6cf, #88d4ab' : '#c5e8d5, #96c9ae'});"></div>
+      </div>
+      <div class="bundle-content">
+        <div class="bundle-savings">SAVE ₹${savings}</div>
+        <div class="bundle-title">${titles[qty]}</div>
+        <div class="bundle-description">${descriptions[qty]}</div>
+        <div class="bundle-price">
+          <span class="current">₹${price}</span>
+          <span class="original">₹${regularPrice}</span>
+        </div>
+        <ul class="bundle-features">
+          <li>${qty} Premium ${caseType}s</li>
+          <li>Mix Different Phone Models</li>
+          <li>Free Delivery</li>
+          <li>30-Day Returns</li>
+        </ul>
+        <div class="bundle-cta">Shop This Bundle</div>
+      </div>
+    </div>
+  `;
+}
+
+// Render Metal Case bundles
+document.getElementById('metalBundles').innerHTML = `
+  ${renderBundleCard('Metal Case', 2)}
+  ${renderBundleCard('Metal Case', 3, true)}
+  ${renderBundleCard('Metal Case', 4)}
+`;
+
+// Render Glass Case bundles
+document.getElementById('glassBundles').innerHTML = `
+  ${renderBundleCard('Glass Case', 2)}
+  ${renderBundleCard('Glass Case', 3, true)}
+  ${renderBundleCard('Glass Case', 4)}
+`;
+</script>
+</body>
+</html>
